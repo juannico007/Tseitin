@@ -120,6 +120,19 @@ def Clausula(C):
 # Input: A (cadena) en notacion inorder en FNC
 # Output: L (lista), lista de listas de literales
 def formaClausal(A):
-
-    #  IMPLEMENTAR AQUI ALGORITMO FORMA CLAUSAL
-    pass
+   F=[]
+   o=0
+   while len(A)>0:
+       if o>=len(A):
+           F.append(Clausula(A))
+           A=[]
+       else:
+           if A[0]=="Y":
+               F.append(Clausula(A[:o]))
+               A = A[o+1:]
+               o=0
+           else:
+               o+=1
+   return F
+   
+    

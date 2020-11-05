@@ -127,7 +127,7 @@ def formaClausal(A):
            F.append(Clausula(A))
            A=[]
        else:
-           if A[0]=="Y":
+           if A[o]=="Y":
                F.append(Clausula(A[:o]))
                A = A[o+1:]
                o=0

@@ -43,16 +43,13 @@ def enFNC(A):
 
     return B
 
-#Funcion para determinar su un caracter en un atomo o no
-#Input: A (caracter)
-def es_atomo(A):
-    return A != "-" and A != "Y" and A != "O" and A != ">" and A != "="
 
 # Algoritmo de transformacion de Tseitin
 # Input: A (cadena) en notacion inorder
 # Output: B (cadena), Tseitin
 def Tseitin(A, letrasProposicionalesA):
     letrasProposicionalesB = [chr(x) for x in range(97, 110)]
+    letrasProposicionales = letrasProposicionalesA + letrasProposicionalesB
     assert(not bool(set(letrasProposicionalesA) & set(letrasProposicionalesB))), u"¡Hay letras proposicionales en común!"
 
     #  IMPLEMENTAR AQUI ALGORITMO TSEITIN
@@ -62,10 +59,12 @@ def Tseitin(A, letrasProposicionalesA):
     s = A[0]            #Simbolo para trabajar
     
     while len(A) > 0:
-        if es_atomo(s) and len(pila) != 0 and pila[-1] == "-":
+        #print(f"A: {A}, pila: {pila}, s: {s}")
+        if s in letrasProposicionales and len(pila) != 0 and pila[-1] == "-":
             i += 1
             atomo = letrasProposicionalesB[i]
             pila = pila[:-1]
+            pila.append(atomo)
             l.append(atomo + "=-" + s)
             A = A[1:]
             if len(A) > 0:

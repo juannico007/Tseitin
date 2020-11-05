@@ -52,7 +52,7 @@ def es_atomo(A):
 # Input: A (cadena) en notacion inorder
 # Output: B (cadena), Tseitin
 def Tseitin(A, letrasProposicionalesA):
-    letrasProposicionalesB = [chr(x) for x in range(256, 1200)]
+    letrasProposicionalesB = [chr(x) for x in range(97, 110)]
     assert(not bool(set(letrasProposicionalesA) & set(letrasProposicionalesB))), u"¡Hay letras proposicionales en común!"
 
     #  IMPLEMENTAR AQUI ALGORITMO TSEITIN
@@ -106,12 +106,12 @@ def Clausula(C):
     L=[]
     while len(C)>0:
         s=C[0]
-        if s =="-" :
+        if s =="-":
             L.append(s+C[1])
-            C=C[:3]
+            C = C[3:]
         else:
             L.append(s)
-            C=C[:2]
+            C=C[2:]
     return L  
     
     
@@ -120,6 +120,17 @@ def Clausula(C):
 # Input: A (cadena) en notacion inorder en FNC
 # Output: L (lista), lista de listas de literales
 def formaClausal(A):
-
-    #  IMPLEMENTAR AQUI ALGORITMO FORMA CLAUSAL
-    pass
+   F=[]
+   o=0
+   while len(A)>0:
+       if o>=len(A):
+           F.append(Clausula(A))
+           A=[]
+       else:
+           if A[o]=="Y":
+               F.append(Clausula(A[:o]))
+               A = A[o+1:]
+               o=0
+           else:
+               o+=1
+   return F

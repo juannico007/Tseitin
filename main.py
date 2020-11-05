@@ -11,11 +11,13 @@ letrasProposicionalesA = ['p', 'q', 'r', 's', 't']
 # formula = "-p"
 # formula = "(pYq)"
 # formula = "(pOq)"
-formula = "(p>q)"
+formula = "(pYq)"
 
 # Aplicando el algoritmo de Tseitin a formula
 # Se obtiene una cada que representa la formula en FNC
 fFNC = fn.Tseitin(formula, letrasProposicionalesA)
+
+print(fFNC)
 
 # Se obtiene la forma clausal como lista de listas de literales
 fClaus = fn.formaClausal(fFNC)
